@@ -510,7 +510,13 @@ namespace ranges
                 struct auto_seeded : public SeedSeq {
                     auto_seeded()
                         : auto_seeded(randutils::local_entropy(
-                            randutils::hash(this), randutils::crushto32(typeid(*this).hash_code())))
+                            randutils::hash(this),
+#ifdef __cpp_rtti
+                            randutils::crushto32(typeid(*this).hash_code())
+#else
+                            randutils::hash( __PRETTY_FUNCTION__  )
+#endif
+                            ))
                     {}
                     template<std::size_t N>
                     auto_seeded(std::array<std::uint32_t, N> const& seeds)
