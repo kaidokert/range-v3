@@ -514,7 +514,7 @@ namespace ranges
 #ifdef __cpp_rtti
                             randutils::crushto32(typeid(*this).hash_code())
 #else
-                            randutils::hash( __PRETTY_FUNCTION__  )
+                            randutils::hash( __PRETTY_FUNCTION__ )
 #endif
                             ))
                     {}
